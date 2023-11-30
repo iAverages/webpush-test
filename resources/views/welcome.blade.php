@@ -856,16 +856,22 @@
         }
         async function getSubscription(registration) {
             try {
-
+                alert("getSubscription")
                 const sub = await registration.pushManager.getSubscription();
                 if (sub) {
+                    alert("already had sub ")
                     return sub;
                 }
 
+                alert("no sub")
+
                 // Get the server's public key
                 const response = await fetch('./vapidPublicKey');
+                alert("got response")
                 const vapidPublicKey = await response.text();
+                alert("got vapid " + vapidPublicKey)
                 const paddedKey = urlBase64ToUint8Array(vapidPublicKey);
+                alert("got padded key: " + paddedKey)
 
                 return await registration.pushManager.subscribe({
                     userVisibleOnly: true,
@@ -889,11 +895,14 @@
                             alert("Permission denied")
                             return;
                         };
-
+                        alert("Permission granted")
                         navigator.serviceWorker.register("sw.js")
+                        alert("Service worker registered")
                         const registration = await navigator.serviceWorker.ready;
+                        alert("Service worker ready")
 
                         const subscription = await getSubscription();
+                        alert("Got subscription")
                         const data = await fetch('./sub', {
                             method: 'post',
                             headers: {
