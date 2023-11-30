@@ -831,9 +831,12 @@
     </style>
 
     <script>
-        window.onerror = (error) => {
+        window.onerror = (event, source, lineno, colno, error) => {
             alert("Error")
-            alert(error.message)
+            alert("error.message: " + error.message)
+            alert("source: " + source)
+            alert("lineno: " + lineno)
+            alert("colno: " + colno)
         }
         const csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
