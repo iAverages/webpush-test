@@ -893,7 +893,7 @@
                         navigator.serviceWorker.register("sw.js")
                         const registration = await navigator.serviceWorker.ready;
 
-                        const subscription = getSubscription();
+                        const subscription = await getSubscription();
                         const data = await fetch('./sub', {
                             method: 'post',
                             headers: {
