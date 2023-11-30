@@ -848,6 +848,7 @@
             return outputArray;
         }
         if ('serviceWorker' in navigator) {
+            alert("service worker");
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('sw.js');
 
@@ -896,6 +897,8 @@
                         };
                     });
             });
+        } else {
+            alert("Service worker not supported")
         }
     </script>
 </head>
