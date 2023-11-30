@@ -23,6 +23,7 @@ Route::get('/', function () {
 
 Route::get("/login", function () {
     Auth::login(User::first());
+    return redirect("/");
 });
 
 Route::post("/notification", function (Request $request) {

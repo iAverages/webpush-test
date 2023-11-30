@@ -933,6 +933,11 @@
                                 class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                 Send now
                             </button>
+
+                            <a href="/login"
+                                class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed underline">
+                                Login
+                            </a>
                         </div>
                     </a>
                 </div>
