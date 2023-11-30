@@ -36,7 +36,7 @@ Route::post("/sub", function (Request $request) {
         $request->endpoint,
         $request->publicKey,
         $request->authToken,
-        $request->contentEncoding
+        $request->contentEncoding ?? "aesgcm"
     );
 
     return response()->json('Subscribed.', 201);
