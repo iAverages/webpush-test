@@ -865,6 +865,13 @@
                                 const vapidPublicKey = await response.text();
                                 const paddedKey = urlBase64ToUint8Array(vapidPublicKey);
 
+                                // attach event listner for permission
+                                document.getElementById('permission').onclick = async () => {
+                                    alert("Clicked")
+                                    const perm = Notification.requestPermission();
+                                    alert(perm);
+                                }
+
                                 return registration.pushManager.subscribe({
                                     userVisibleOnly: true,
                                     applicationServerKey: paddedKey
@@ -895,6 +902,8 @@
                             });
                             console.log("yippie");
                         };
+
+
                     }).catch(((error) => {
                         alert("Errored")
                         alert(error.message)
@@ -937,7 +946,13 @@
 
                             <button id="notify"
                                 class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                Send now
+                                Send notification
+                            </button>
+
+
+                            <button id="permission"
+                                class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                                Request notification permission
                             </button>
 
                             <a href="/login"
