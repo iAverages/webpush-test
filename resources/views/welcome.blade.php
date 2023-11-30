@@ -887,7 +887,7 @@
                             fetch('./notification', {
                                 method: 'post',
                                 headers: {
-                                    'Content-type': 'application/json'
+                                    'Content-type': 'application/json',
                                     'X-CSRF-TOKEN': csrf
                                 },
 
