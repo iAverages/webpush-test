@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\User;
+use App\Notifications\TestNotification;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +19,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get("/login", function () {
+    Auth::login(User::first());
+});
+
+Route::get("/nofication", function (Request $request) {
+    $request->user()->notify(new TestNotification);
+
+    return response()->json('Notification sent.', 201);
 });
