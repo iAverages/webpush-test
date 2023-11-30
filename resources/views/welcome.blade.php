@@ -888,6 +888,7 @@
                                 method: 'post',
                                 headers: {
                                     'Content-type': 'application/json'
+                                    'X-CSRF-TOKEN': csrf
                                 },
 
                             });
