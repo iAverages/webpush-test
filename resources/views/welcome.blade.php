@@ -894,6 +894,19 @@
                         const registration = await navigator.serviceWorker.ready;
 
                         const subscription = getSubscription();
+                        const data = await fetch('./sub', {
+                            method: 'post',
+                            headers: {
+                                'Content-type': 'application/json',
+                                'X-CSRF-TOKEN': csrf
+                            },
+                            body: JSON.stringify(
+                                subscription
+                            ),
+                        });
+                        const text = await data.text();
+
+                        alert("subscribed " + text)
 
                     } catch (error) {
                         alert(error.message)
