@@ -883,7 +883,7 @@
                     try {
 
                         alert("Clicked")
-                        const perm = Notification.requestPermission();
+                        const perm = await Notification.requestPermission();
                         alert(perm);
                         if (!perm) return;
 
