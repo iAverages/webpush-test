@@ -854,7 +854,7 @@
             }
             return outputArray;
         }
-        async function getSubscriptioin(registration) {
+        async function getSubscription(registration) {
             try {
 
                 const sub = await registration.pushManager.getSubscription();
@@ -885,7 +885,10 @@
                         alert("Clicked")
                         const perm = await Notification.requestPermission();
                         alert(perm);
-                        if (!perm) return;
+                        if (!perm || perm === "denied") {
+                            alert("Permission denied")
+                            return;
+                        };
 
                         navigator.serviceWorker.register("sw.js")
                         const registration = await navigator.serviceWorker.ready;
