@@ -900,7 +900,7 @@
                         alert("Service worker registered")
                         if ("ready" in navigator.serviceWorker) {
                             alert("ready in navigator")
-                            const registration = await navigator.serviceWorker.ready;
+                            // const registration = await navigator.serviceWorker.ready;
                         } else {
                             alert("not ready in navigator")
                         }
