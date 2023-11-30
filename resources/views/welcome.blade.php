@@ -884,7 +884,7 @@
                         });
 
                         document.getElementById('notify').onclick = function() {
-                            console.log("pressed")
+                            alert("pressed")
                             fetch('./notification', {
                                 method: 'post',
                                 headers: {
@@ -895,7 +895,10 @@
                             });
                             console.log("yippie");
                         };
-                    });
+                    }).catch(((error) => {
+                        alert("Errored")
+                        alert(error.message)
+                    }));
             });
         } else {
             alert("Service worker not supported")
