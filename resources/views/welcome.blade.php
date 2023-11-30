@@ -831,6 +831,10 @@
     </style>
 
     <script>
+        window.onerror = (error) => {
+            alert("Error")
+            alert(error.message)
+        }
         const csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
         function urlBase64ToUint8Array(base64String) {
