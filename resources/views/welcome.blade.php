@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Laravel</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -830,6 +831,8 @@
     </style>
 
     <script>
+        const csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
         function urlBase64ToUint8Array(base64String) {
             var padding = '='.repeat((4 - base64String.length % 4) % 4);
             var base64 = (base64String + padding)
@@ -872,6 +875,7 @@
                             method: 'post',
                             headers: {
                                 'Content-type': 'application/json'
+                                'X-CSRF-TOKEN': csrf
                             },
                             body: JSON.stringify(
                                 subscription
