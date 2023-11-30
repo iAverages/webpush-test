@@ -848,33 +848,45 @@
             return outputArray;
         }
         async function getSubscriptioin(registration) {
-            const sub = await registration.pushManager.getSubscription();
-            if (sub) {
-                return sub;
+            try {
+
+                const sub = await registration.pushManager.getSubscription();
+                if (sub) {
+                    return sub;
+                }
+
+                // Get the server's public key
+                const response = await fetch('./vapidPublicKey');
+                const vapidPublicKey = await response.text();
+                const paddedKey = urlBase64ToUint8Array(vapidPublicKey);
+
+                return await registration.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: paddedKey
+                });
+            } catch (error) {
+                alert(error.message)
             }
-
-            // Get the server's public key
-            const response = await fetch('./vapidPublicKey');
-            const vapidPublicKey = await response.text();
-            const paddedKey = urlBase64ToUint8Array(vapidPublicKey);
-
-            return await registration.pushManager.subscribe({
-                userVisibleOnly: true,
-                applicationServerKey: paddedKey
-            });
         }
         if ('serviceWorker' in navigator) {
             alert("service worker");
 
             document.getElementById('permission').onclick = async () => {
-                alert("Clicked")
-                const perm = Notification.requestPermission();
-                alert(perm);
+                try {
 
-                navigator.serviceWorker.register("sw.js")
-                const registration = await navigator.serviceWorker.ready;
+                    alert("Clicked")
+                    const perm = Notification.requestPermission();
+                    alert(perm);
+                    if (!perm) return;
 
-                const subscription = getSubscription();
+                    navigator.serviceWorker.register("sw.js")
+                    const registration = await navigator.serviceWorker.ready;
+
+                    const subscription = getSubscription();
+
+                } catch (error) {
+                    alert(error.message)
+                }
             }
 
             document.getElementById('notify').onclick = () => {
@@ -889,7 +901,7 @@
                 });
                 console.log("yippie");
             };
-
+            alert("should be reged")
             // window.addEventListener('load', () {
             //     navigator.serviceWorker.register('sw.js');
 
