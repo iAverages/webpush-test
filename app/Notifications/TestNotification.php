@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -50,7 +51,10 @@ class TestNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'title' => 'Hello from Laravel!',
+            'body' => 'Thank you for using our application.',
+            'action_url' => 'https://laravel.com',
+            'created' => Carbon::now()->toIso8601String(),
         ];
     }
 
