@@ -898,7 +898,12 @@
                         alert("Permission granted")
                         navigator.serviceWorker.register("sw.js")
                         alert("Service worker registered")
-                        const registration = await navigator.serviceWorker.ready;
+                        if ("ready" in navigator.serviceWorker) {
+                            alert("ready in navigator")
+                            const registration = await navigator.serviceWorker.ready;
+                        } else {
+                            alert("not ready in navigator")
+                        }
                         alert("Service worker ready")
 
                         const subscription = await getSubscription();
