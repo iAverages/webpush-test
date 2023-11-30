@@ -877,96 +877,99 @@
         }
         if ('serviceWorker' in navigator) {
             alert("service worker");
+            window.addEventListener("load", () => {
 
-            document.getElementById('permission').onclick = async () => {
-                try {
+                document.getElementById('permission').onclick = async () => {
+                    try {
 
-                    alert("Clicked")
-                    const perm = Notification.requestPermission();
-                    alert(perm);
-                    if (!perm) return;
+                        alert("Clicked")
+                        const perm = Notification.requestPermission();
+                        alert(perm);
+                        if (!perm) return;
 
-                    navigator.serviceWorker.register("sw.js")
-                    const registration = await navigator.serviceWorker.ready;
+                        navigator.serviceWorker.register("sw.js")
+                        const registration = await navigator.serviceWorker.ready;
 
-                    const subscription = getSubscription();
+                        const subscription = getSubscription();
 
-                } catch (error) {
-                    alert(error.message)
+                    } catch (error) {
+                        alert(error.message)
+                    }
                 }
-            }
 
-            document.getElementById('notify').onclick = () => {
-                alert("pressed")
-                fetch('./notification', {
-                    method: 'post',
-                    headers: {
-                        'Content-type': 'application/json',
-                        'X-CSRF-TOKEN': csrf
-                    },
+                document.getElementById('notify').onclick = () => {
+                    alert("pressed")
+                    fetch('./notification', {
+                        method: 'post',
+                        headers: {
+                            'Content-type': 'application/json',
+                            'X-CSRF-TOKEN': csrf
+                        },
 
-                });
-                console.log("yippie");
-            };
-            alert("should be reged")
-            // window.addEventListener('load', () {
-            //     navigator.serviceWorker.register('sw.js');
+                    });
+                    console.log("yippie");
+                };
+                alert("should be reged")
 
-            //     navigator.serviceWorker.ready
-            //         .then(async (registration) => {
-            //             let sub =await registration.pushManager.getSubscription();
-            //             if (!sub) {
-            //                     // Get the server's public key
-            //                     const response = await fetch('./vapidPublicKey');
-            //                     const vapidPublicKey = await response.text();
-            //                     const paddedKey = urlBase64ToUint8Array(vapidPublicKey);
+                // window.addEventListener('load', () {
+                //     navigator.serviceWorker.register('sw.js');
 
-            //                     // attach event listner for permission
-            //                     document.getElementById('permission').onclick = async () => {
-            //                         alert("Clicked")
-            //                         const perm = Notification.requestPermission();
-            //                         alert(perm);
-            //                     }
+                //     navigator.serviceWorker.ready
+                //         .then(async (registration) => {
+                //             let sub =await registration.pushManager.getSubscription();
+                //             if (!sub) {
+                //                     // Get the server's public key
+                //                     const response = await fetch('./vapidPublicKey');
+                //                     const vapidPublicKey = await response.text();
+                //                     const paddedKey = urlBase64ToUint8Array(vapidPublicKey);
 
-            //                     sub = await registration.pushManager.subscribe({
-            //                         userVisibleOnly: true,
-            //                         applicationServerKey: paddedKey
-            //                     });
-            //             }
+                //                     // attach event listner for permission
+                //                     document.getElementById('permission').onclick = async () => {
+                //                         alert("Clicked")
+                //                         const perm = Notification.requestPermission();
+                //                         alert(perm);
+                //                     }
 
-            //                 });
-            //         }).then(function(subscription) {
-            //             // Send the subscription details to the server using the Fetch API.
-            //             fetch('./sub', {
-            //                 method: 'post',
-            //                 headers: {
-            //                     'Content-type': 'application/json',
-            //                     'X-CSRF-TOKEN': csrf
-            //                 },
-            //                 body: JSON.stringify(
-            //                     subscription
-            //                 ),
-            //             });
+                //                     sub = await registration.pushManager.subscribe({
+                //                         userVisibleOnly: true,
+                //                         applicationServerKey: paddedKey
+                //                     });
+                //             }
 
-            //             document.getElementById('notify').onclick = function() {
-            //                 alert("pressed")
-            //                 fetch('./notification', {
-            //                     method: 'post',
-            //                     headers: {
-            //                         'Content-type': 'application/json',
-            //                         'X-CSRF-TOKEN': csrf
-            //                     },
+                //                 });
+                //         }).then(function(subscription) {
+                //             // Send the subscription details to the server using the Fetch API.
+                //             fetch('./sub', {
+                //                 method: 'post',
+                //                 headers: {
+                //                     'Content-type': 'application/json',
+                //                     'X-CSRF-TOKEN': csrf
+                //                 },
+                //                 body: JSON.stringify(
+                //                     subscription
+                //                 ),
+                //             });
 
-            //                 });
-            //                 console.log("yippie");
-            //             };
+                //             document.getElementById('notify').onclick = function() {
+                //                 alert("pressed")
+                //                 fetch('./notification', {
+                //                     method: 'post',
+                //                     headers: {
+                //                         'Content-type': 'application/json',
+                //                         'X-CSRF-TOKEN': csrf
+                //                     },
+
+                //                 });
+                //                 console.log("yippie");
+                //             };
 
 
-            //         }).catch(((error) => {
-            //             alert("Errored")
-            //             alert(error.message)
-            //         }));
-            // });
+                //         }).catch(((error) => {
+                //             alert("Errored")
+                //             alert(error.message)
+                //         }));
+                // });
+            })
         } else {
             alert("Service worker not supported")
         }
