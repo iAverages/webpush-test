@@ -874,7 +874,7 @@
                         fetch('./sub', {
                             method: 'post',
                             headers: {
-                                'Content-type': 'application/json'
+                                'Content-type': 'application/json',
                                 'X-CSRF-TOKEN': csrf
                             },
                             body: JSON.stringify(
