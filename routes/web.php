@@ -43,7 +43,5 @@ Route::post("/sub", function (Request $request) {
 });
 
 Route::get("/vapidPublicKey", function () {
-    return response()->json([
-        'publicKey' => config('webpush.vapid.public_key'),
-    ]);
+    return response(config('webpush.vapid.public_key'));
 });
