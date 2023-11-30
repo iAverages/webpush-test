@@ -25,8 +25,25 @@ Route::get("/login", function () {
     Auth::login(User::first());
 });
 
-Route::get("/nofication", function (Request $request) {
+Route::post("/notification", function (Request $request) {
     $request->user()->notify(new TestNotification);
 
     return response()->json('Notification sent.', 201);
+});
+
+Route::post("/sub", function (Request $request) {
+    $request->user()->updatePushSubscription(
+        $request->endpoint,
+        $request->publicKey,
+        $request->authToken,
+        $request->contentEncoding
+    );
+
+    return response()->json('Subscribed.', 201);
+});
+
+Route::get("/vapidPublicKey", function () {
+    return response()->json([
+        'publicKey' => config('webpush.vapid.public_key'),
+    ]);
 });
